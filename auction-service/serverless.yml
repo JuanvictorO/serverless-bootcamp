@@ -1,0 +1,27 @@
+org: rataque
+app: serverless-bootcamp
+service: auction-service
+
+plugins:
+  - serverless-babel-plugin
+  
+provider:
+  name: aws
+  runtime: nodejs20.x
+  memorySize: 256
+  stage: ${opt:stage, 'dev'}
+  region: us-east-2
+
+functions:
+  createAuction:
+    handler: src/handlers/createAuction.handler
+    events:
+      - http:
+          path: /auction
+          method: POST
+
+custom:
+  babelPresets:
+    - latest
+  bundle:
+    linting: false
