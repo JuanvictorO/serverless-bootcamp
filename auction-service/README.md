@@ -37,10 +37,10 @@ After running deploy, you should see output similar to:
 
 ```
 endpoints:
-  POST - https://2fe3xkpxr3.execute-api.us-east-2.amazonaws.com/dev/auction
-  GET - https://2fe3xkpxr3.execute-api.us-east-2.amazonaws.com/dev/auctions
-  GET - https://2fe3xkpxr3.execute-api.us-east-2.amazonaws.com/dev/auction/{id}
-  PATCH - https://2fe3xkpxr3.execute-api.us-east-2.amazonaws.com/dev/place/{id}/bid
+  POST - http://your-base-url/dev/auction
+  GET - http://your-base-url/dev/auctions
+  GET - http://your-base-url/dev/auction/{id}
+  PATCH - http://your-base-url/dev/place/{id}/bid
 functions:
   createAuction: auction-service-dev-createAuction (24 MB)
   getAuctions: auction-service-dev-getAuctions (24 MB)
