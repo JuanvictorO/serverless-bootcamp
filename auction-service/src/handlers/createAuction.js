@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto'
+import { randomUUID as uuid } from 'crypto'
 import AWS from 'aws-sdk'
 import createError from 'http-errors'
 import commomMiddleware from '../lib/commomMiddleware.js'
@@ -8,13 +8,15 @@ const dynamodb = new AWS.DynamoDB.DocumentClient()
 async function createAuction (event, context) {
   const { title } = event.body
   const now = new Date()
-  const uuid = randomUUID()
+  const endDate = new Date()
+  endDate.setHours(now.getHours() + 1)
 
   const auction = {
-    id: uuid,
+    id: uuid(),
     title,
     status: 'OPEN',
     createdAt: now.toISOString(),
+    endingAt: endDate.toISOString(),
     highestBid: {
       amount: 0
     }
