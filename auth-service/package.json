@@ -1,0 +1,14 @@
+{
+  "name": "auth-service",
+  "version": "1.0",
+  "description": "",
+  "author": "Juan Victor Oliveira Silva",
+  "license": "MIT",
+  "dependencies": {
+    "jsonwebtoken": "^8.1.0",
+    "serverless": "3.22.0"
+  },
+  "devDependencies": {
+    "serverless-bundle": "^1.3.3"
+  }
+}
