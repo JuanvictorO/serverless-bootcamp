@@ -2,6 +2,9 @@ import { randomUUID as uuid } from 'crypto'
 import AWS from 'aws-sdk'
 import createError from 'http-errors'
 import commomMiddleware from '../lib/commomMiddleware.js'
+import validator from '@middy/validator'
+import { transpileSchema } from '@middy/validator/transpile'
+import createAuctionSchema from '../lib/schemas/createAuctionSchema.js'
 
 const dynamodb = new AWS.DynamoDB.DocumentClient()
 
@@ -39,3 +42,9 @@ async function createAuction (event, context) {
 }
 
 export const handler = commomMiddleware(createAuction)
+  .use(
+    validator({
+      eventSchema: transpileSchema(createAuctionSchema),
+      i18nEnabled: false
+    })
+  )

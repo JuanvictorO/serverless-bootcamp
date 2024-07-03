@@ -17,7 +17,7 @@ aws configure
 In order to deploy the example, you need to change the field "org" in the serverless.yml file to your own org serverless account and run the following command:
 
 ```
-serverless deploy
+yarn serverless deploy
 ```
 
 After running deploy, you should see output similar to:
@@ -29,10 +29,11 @@ endpoints:
   GET - http://your-base-url/dev/auction/{id}
   PATCH - http://your-base-url/dev/place/{id}/bid
 functions:
-  createAuction: auction-service-dev-createAuction (24 MB)
-  getAuctions: auction-service-dev-getAuctions (24 MB)
-  getAuction: auction-service-dev-getAuction (24 MB)
-  placeBid: auction-service-dev-placeBid (24 MB)
+  createAuction: auction-service-dev-createAuction
+  getAuctions: auction-service-dev-getAuctions
+  getAuction: auction-service-dev-getAuction
+  placeBid: auction-service-dev-placeBid
+  processAuctions: auction-service-dev-processAuctions
 ```
 
 ### Postman files to test

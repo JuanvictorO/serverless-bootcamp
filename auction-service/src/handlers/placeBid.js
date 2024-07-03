@@ -2,6 +2,9 @@ import AWS from 'aws-sdk'
 import createError from 'http-errors'
 import commomMiddleware from '../lib/commomMiddleware.js'
 import { getAuctionById } from './getAuction.js'
+import validator from '@middy/validator'
+import { transpileSchema } from '@middy/validator/transpile'
+import placeBidSchema from '../lib/schemas/placeBidSchema.js'
 
 const dynamodb = new AWS.DynamoDB.DocumentClient()
 
@@ -45,3 +48,9 @@ async function placeBid (event, context) {
 }
 
 export const handler = commomMiddleware(placeBid)
+  .use(
+    validator({
+      eventSchema: transpileSchema(placeBidSchema),
+      i18nEnabled: false
+    })
+  )
