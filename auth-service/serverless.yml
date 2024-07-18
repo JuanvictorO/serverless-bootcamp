@@ -3,19 +3,26 @@ app: serverless-bootcamp
 service: auth-service
 
 plugins:
-  - serverless-bundle
+  - serverless-offline
+
+package:
+  individually: true
+  patterns:
+    - node_modules/**
+    - sls_venv/**
 
 provider:
   name: aws
-  runtime: nodejs16.x
-  memorySize: 128
+  runtime: nodejs20.x
+  memorySize: 256
+  stage: ${opt:stage, 'dev'}
+  region: us-east-2
   environment:
-    AUTH0_PUBLIC_KEY: ${file(secret.pem)}
+    AUTH0_PUBLIC_KEY: ${file(secret.json):AUTH0_PUBLIC_KEY}
 
 functions:
   auth:
     handler: src/handlers/auth.handler
-    cors: true
   publicEndpoint:
     handler: src/handlers/public.handler
     events:
@@ -58,3 +65,6 @@ resources:
 custom:
   bundle:
     linting: false
+    packager: 'yarn'
+  babelPresets:
+    - latest
